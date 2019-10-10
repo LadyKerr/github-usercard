@@ -2,13 +2,13 @@
            (replacing the palceholder with your Github name):
            https://api.github.com/users/<your name>
 */
-//const axios = require("axios");
 
 axios.get("https://api.github.com/users/LadyKerr")
 .then(res => {
     console.log(res)
 })
 .catch(err => console.log(err))
+
 /* Step 2: Inspect and study the data coming back, this is YOUR
    github info! You will need to understand the structure of this
    data in order to use it to build your component function
@@ -30,7 +30,7 @@ axios.get("https://api.github.com/users/LadyKerr")
           user, and adding that card to the DOM.
 */
 
-//const followersArray = [];
+const followersArray = [];
 
 /* Step 3: Create a function that accepts a single object as its only argument,
           Using DOM methods and properties, create a component that will return the following DOM element:
@@ -51,6 +51,74 @@ axios.get("https://api.github.com/users/LadyKerr")
 </div>
 
 */
+
+//github card component & using the format above create elements needs to display cards
+const GitHubCard = (userData) => {
+    //card wrapper div
+    const  cardWrapper = document.createElement("div");
+    cardWrapper.classList.add('user-card');
+
+    //card image
+    const cardImg = document.createElement("img")
+    cardImg.src = userData.avatar_url
+
+    //card information wrapper div
+    const cardInfo = document.createElement("div")
+    cardInfo.classList.add("card-info")
+
+    //user's legal name
+    const cardName = document.createElement("h3")
+    cardName.classList.add("name")
+    cardName.textContent = userData.name
+
+    //user's GH username
+    const cardUsername = document.createElement("p")
+    cardUsername.classList.add("username")
+    cardUsername.textContent = userData.login
+
+    //user's location
+    const cardLocation = document.createElement("p")
+    cardLocation.textContent = `Location: ${userData.location}`
+
+    //user's link to profile
+    const cardProfile = document.createElement("p")
+    cardProfile.textContent("Profile:")
+    //anchor tag nested inside the <p />
+    const profileLink = document.createElement("a")
+    profileLink.href = userData.html_url
+    profileLink.textContent = userData.html_url
+    cardProfile.appendChild(profileLink)
+
+    //user's followers
+    const cardFollowers = document.createElement("p")
+    cardFollowers.textContent = `Followers: ${userData.followers}`
+
+    //user's following
+    const cardFollowing = document.createElement("p")
+    cardFollowing.textContent = `Location: ${userData.following}`
+
+    //user's bio
+    const cardBio = document.createElement("p")
+    cardBio.textContent = userData.bio
+
+    //append all the elements to main wrapper div & info div to create the structure of the card
+    //main wrapper div appendChild
+    cardWrapper.appendChild(cardImg)
+    cardWrapper.appendChild(cardInfo)
+
+    //infoDiv appendChild
+    cardInfo.appendChild(cardName)
+    cardInfo.appendChild(cardUsername)
+    cardInfo.appendChild(cardLocation)
+    cardInfo.appendChild(cardProfile)
+    cardInfo.appendChild(cardFollowers)
+    cardInfo.appendChild(cardFollowing)
+    cardInfo.appendChild(cardBio)
+
+    //in the end return main card wrapper
+    return cardWrapper;
+}
+
 
 /* List of LS Instructors Github username's:
   tetondan
