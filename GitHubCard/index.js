@@ -1,13 +1,5 @@
-/* Step 5: Now that you have your own card added to the DOM, either
-          follow this link in your browser https://api.github.com/users/<Your github name>/followers
-          , manually find some other users' github handles, or use the list found
-          at the bottom of the page. Get at least 5 different Github usernames and add them as
-          Individual strings to the friendsArray below.
-
-          Using that array, iterate over it, requesting data for each user, creating a new card for each
-          user, and adding that card to the DOM.
-*/
-
+/*
+//Note: students can opt to use this array & iterate over it to display followers or they can access the url via axios
 const followersArray = [
   "tetondan",
   "dustinmyers",
@@ -15,8 +7,9 @@ const followersArray = [
   "luishrd",
   "bigknell"
 ];
+*/
 
-//adding html class to the global scope
+//adding html class to the global scope for easy access
 const mainCard = document.querySelector(".cards");
 
 //axios call to the server to retrieve my info
@@ -28,7 +21,7 @@ axios
   })
   .catch(err => console.log(err));
 
-//axios call to retrieve followers info
+//axios call to retrieve my followers info
 axios
   .get("https://api.github.com/users/LadyKerr/followers")
   .then(res => {
@@ -40,9 +33,7 @@ axios
   })
   .catch(err => console.log(err));
 
-//followersArray.forEach(user => {});
-
-//github card component & using the format above create elements needs to display cards
+//github card constructor function & using the format provided create elements needed to display cards
 function GitHubCard(userData) {
   //card wrapper div
   const cardWrapper = document.createElement("div");
