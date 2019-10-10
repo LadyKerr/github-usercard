@@ -3,12 +3,6 @@
            https://api.github.com/users/<your name>
 */
 
-axios.get("https://api.github.com/users/LadyKerr")
-.then(res => {
-    console.log(res)
-})
-.catch(err => console.log(err))
-
 /* Step 2: Inspect and study the data coming back, this is YOUR
    github info! You will need to understand the structure of this
    data in order to use it to build your component function
@@ -52,11 +46,28 @@ const followersArray = [];
 
 */
 
+/* List of LS Instructors Github username's:
+  tetondan
+  dustinmyers
+  justsml
+  luishrd
+  bigknell
+*/
+
+//axios call to the server
+axios.get("https://api.github.com/users/LadyKerr")
+.then(res => {
+    console.log(res)
+    const mainCard = document.querySelector(".cards")
+        mainCard.appendChild(GitHubCard(res.data))
+})
+.catch(err => console.log(err))
+
 //github card component & using the format above create elements needs to display cards
 const GitHubCard = (userData) => {
     //card wrapper div
     const  cardWrapper = document.createElement("div");
-    cardWrapper.classList.add('user-card');
+    cardWrapper.classList.add('card');
 
     //card image
     const cardImg = document.createElement("img")
@@ -102,11 +113,11 @@ const GitHubCard = (userData) => {
     cardBio.textContent = userData.bio
 
     //append all the elements to main wrapper div & info div to create the structure of the card
-    //main wrapper div appendChild
+    //main wrapper div appendChild - this is the main div that houses img & info
     cardWrapper.appendChild(cardImg)
     cardWrapper.appendChild(cardInfo)
 
-    //infoDiv appendChild
+    //infoDiv appendChild - this div houses all the other divs
     cardInfo.appendChild(cardName)
     cardInfo.appendChild(cardUsername)
     cardInfo.appendChild(cardLocation)
@@ -118,12 +129,3 @@ const GitHubCard = (userData) => {
     //in the end return main card wrapper
     return cardWrapper;
 }
-
-
-/* List of LS Instructors Github username's:
-  tetondan
-  dustinmyers
-  justsml
-  luishrd
-  bigknell
-*/
